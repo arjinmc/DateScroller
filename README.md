@@ -4,7 +4,7 @@ The start date is today,the last date is unlimited.
 
 This view is one of my pass work,I rewrite it and change a little bit.Now it looks like this.
 
-![image](https://github.com/arjinmc/RecyclerViewDecoration/blob/master/image/sample.gif)
+![image](https://github.com/arjinmc/DateScroller/blob/master/image/sample.gif)
 
 ## How to use
 in xml
