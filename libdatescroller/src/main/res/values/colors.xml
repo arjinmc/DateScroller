@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="datescroller_check_bg">#fcf5af</color>
+    <color name="datescroller_check_border">#fae601</color>
+    <color name="datescroller_toast_background">#6b000000</color>
+</resources>

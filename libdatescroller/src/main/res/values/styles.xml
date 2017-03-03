@@ -1,0 +1,13 @@
+<resources xmlns:android="http://schemas.android.com/tools">
+
+
+    <style name="datescroller_item_txt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/datescroller_txt_size</item>
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

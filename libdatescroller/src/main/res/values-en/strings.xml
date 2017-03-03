@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">DateScroller</string>
+
+
+    <string name="datescroller_sunday">SUN</string>
+    <string name="datescroller_monday">MON</string>
+    <string name="datescroller_tuseday">TUE</string>
+    <string name="datescroller_wednesday">WED</string>
+    <string name="datescroller_thursday">THU</string>
+    <string name="datescroller_friday">FRI</string>
+    <string name="datescroller_saturday">SAT</string>
+    <string name="datescroller_today">today</string>
+    <string name="datescroller_year">"%d  "</string>
+    <string-array name="datescroller_month_array">
+        <item>January</item>
+        <item>February</item>
+        <item>Match</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+
+</resources>

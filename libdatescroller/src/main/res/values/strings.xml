@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">DateScroller</string>
+
+
+    <string name="datescroller_sunday">星期日</string>
+    <string name="datescroller_monday">星期一</string>
+    <string name="datescroller_tuseday">星期二</string>
+    <string name="datescroller_wednesday">星期三</string>
+    <string name="datescroller_thursday">星期四</string>
+    <string name="datescroller_friday">星期五</string>
+    <string name="datescroller_saturday">星期六</string>
+    <string name="datescroller_today">今天</string>
+    <string name="datescroller_year">%d年</string>
+    <string-array name="datescroller_month_array">
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
+    </string-array>
+</resources>
