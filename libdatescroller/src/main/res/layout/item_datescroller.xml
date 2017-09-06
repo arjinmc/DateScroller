@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:padding="3dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    android:padding="3dp">
 
     <TextView
         android:id="@+id/item_datescroller_dayOfWeek"
-        style="@style/datescroller_item_txt"
-        />
+        style="@style/datescroller_item_txt" />
+
     <TextView
         android:id="@+id/item_datescroller_day"
-        style="@style/datescroller_item_txt"
-        />
+        style="@style/datescroller_item_txt" />
 </LinearLayout>

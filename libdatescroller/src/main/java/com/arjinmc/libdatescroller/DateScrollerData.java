@@ -2,7 +2,7 @@ package com.arjinmc.libdatescroller;
 
 /**
  * date bean
- * Created by Eminem Lu on 24/2/17.
+ * Created by Eminem Lo on 24/2/17.
  * Email arjinmc@hotmail.com
  */
 

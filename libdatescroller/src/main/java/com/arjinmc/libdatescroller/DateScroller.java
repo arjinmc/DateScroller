@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 /**
- * Created by Eminem Lu on 24/2/17.
+ * Created by Eminem Lo on 24/2/17.
  * Email arjinmc@hotmail.com
  */
 
@@ -54,7 +54,7 @@ public class DateScroller extends LinearLayout {
     }
 
 
-    private void init(Context context){
+    private void init(Context context) {
 
 
         this.setOrientation(LinearLayout.VERTICAL);
@@ -66,29 +66,29 @@ public class DateScroller extends LinearLayout {
         LayoutParams contentParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        int margin = DateScrollerUitls.dp2px(getContext(),8);
+        int margin = DateScrollerUitls.dp2px(getContext(), 8);
         contentParams.topMargin = margin;
         contentParams.leftMargin = margin;
         contentParams.rightMargin = margin;
         contentParams.bottomMargin = margin;
         contentLinearLayout.setLayoutParams(contentParams);
-        contentLinearLayout.setPadding(0,0,DateScrollerUitls.dp2px(getContext(),8),0);
+        contentLinearLayout.setPadding(0, 0, DateScrollerUitls.dp2px(getContext(), 8), 0);
         contentLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
         contentLinearLayout.setBackgroundResource(R.drawable.shape_datescroller_bg);
 
         //today layout
         final LinearLayout todayLinearLayout = (LinearLayout) LayoutInflater.from(getContext())
-                .inflate(R.layout.item_datescroller,null);
+                .inflate(R.layout.item_datescroller, null);
         LayoutParams todayParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         todayLinearLayout.setLayoutParams(todayParams);
         todayLinearLayout.setGravity(Gravity.CENTER);
         tvTodayDayOfWeek = (TextView) todayLinearLayout.findViewById(R.id.item_datescroller_dayOfWeek);
         tvTodayDayOfWeek.setText(getContext().getString(R.string.datescroller_today));
-        tvTodayDayOfWeek.setPadding(DateScrollerUitls.dp2px(getContext(),8),0,0,0);
+        tvTodayDayOfWeek.setPadding(DateScrollerUitls.dp2px(getContext(), 8), 0, 0, 0);
 
 
         //init today dayta
-        todayDate = DateScrollerUitls.addDate(getContext(),calendar,0);
+        todayDate = DateScrollerUitls.addDate(getContext(), calendar, 0);
         currentDate = todayDate;
         todayLinearLayout.setBackgroundResource(R.drawable.shape_datescroller_check_today_bg);
 
@@ -98,28 +98,28 @@ public class DateScroller extends LinearLayout {
                 dateScollerView.setSelected(-1);
                 todayLinearLayout.setBackgroundResource(R.drawable.shape_datescroller_check_today_bg);
                 currentDate = todayDate;
-                if(onItemClickListener!=null)
+                if (onItemClickListener != null)
                     onItemClickListener.onItemClick(currentDate);
             }
         });
 
         //diver
         View vDiver = new View(getContext());
-        vDiver.setLayoutParams(new LayoutParams(DateScrollerUitls.dp2px(getContext(),1),LayoutParams.MATCH_PARENT));
+        vDiver.setLayoutParams(new LayoutParams(DateScrollerUitls.dp2px(getContext(), 1), LayoutParams.MATCH_PARENT));
         vDiver.setBackgroundColor(Color.BLACK);
 
 
         contentLinearLayout.addView(todayLinearLayout);
         contentLinearLayout.addView(vDiver);
 
-        dateScollerView = new DateScrollerView(getContext(),calendar);
+        dateScollerView = new DateScrollerView(getContext(), calendar);
         dateScollerView.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         dateScollerView.setOnItemCheckListener(new DateScrollerView.OnItemCheckListener() {
             @Override
             public void onItemSelected(DateScrollerData datedata) {
                 currentDate = datedata;
-                if(onItemClickListener!=null)
+                if (onItemClickListener != null)
                     onItemClickListener.onItemClick(currentDate);
                 todayLinearLayout.setBackgroundResource(0);
             }
@@ -131,16 +131,16 @@ public class DateScroller extends LinearLayout {
 
     }
 
-    public DateScrollerData getCurrentDate(){
+    public DateScrollerData getCurrentDate() {
         return currentDate;
     }
 
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         public void onItemClick(DateScrollerData dateData);
     }
 

@@ -23,11 +23,11 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by Eminem Lu on 24/2/17.
+ * Created by Eminem Lo on 24/2/17.
  * Email arjinmc@hotmail.com
  */
 
-public class DateScrollerView extends ViewGroup{
+public class DateScrollerView extends ViewGroup {
 
     private final int NEW_COUNT = 60;
     private int offfseForAddDays = 300;
@@ -57,7 +57,7 @@ public class DateScrollerView extends ViewGroup{
 
     float leftBorder = 0;
 
-    public DateScrollerView(Context context,Calendar calendar){
+    public DateScrollerView(Context context, Calendar calendar) {
         super(context);
         this.calendar = calendar;
         init();
@@ -87,12 +87,12 @@ public class DateScrollerView extends ViewGroup{
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         final int childSize = getChildCount();
-        for(int i=0;i<childSize;i++){
+        for (int i = 0; i < childSize; i++) {
             View child = getChildAt(i);
-            child.measure(0,0);
-            if(parentHeight == 0){
+            child.measure(0, 0);
+            if (parentHeight == 0) {
                 parentHeight = child.getMeasuredHeight();
-                itemWidth = child.getMeasuredWidth()+20;//add offset
+                itemWidth = child.getMeasuredWidth() + 20;//add offset
             }
         }
         setMeasuredDimension(widthMeasureSpec, parentHeight);
@@ -101,21 +101,21 @@ public class DateScrollerView extends ViewGroup{
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
-        if(parentWidth==0){
+        if (parentWidth == 0) {
             parentWidth = r;
-            offfseForAddDays = parentWidth/2;
-            toastPosition = parentWidth/itemWidth-1;
+            offfseForAddDays = parentWidth / 2;
+            toastPosition = parentWidth / itemWidth - 1;
         }
 
         layoutChild();
 
     }
 
-    private void layoutChild(){
+    private void layoutChild() {
 
 
         final int childSize = getChildCount();
-        for(int i=0;i<childSize;i++){
+        for (int i = 0; i < childSize; i++) {
             View child = getChildAt(i);
 
             child.layout(itemWidth * i, 0, itemWidth * (i + 1), parentHeight);
@@ -123,7 +123,7 @@ public class DateScrollerView extends ViewGroup{
         }
     }
 
-    private void init(){
+    private void init() {
 
         scroller = new OverScroller(getContext());
         //the touch distance for distinguish touch event between click and scroll
@@ -139,7 +139,7 @@ public class DateScrollerView extends ViewGroup{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
                 downX = event.getX();
@@ -149,30 +149,21 @@ public class DateScrollerView extends ViewGroup{
 
                 moveX = event.getX();
                 //if is not scrolling
-                if(Math.abs(downX-moveX)>=touchSlop) {
+                if (Math.abs(downX - moveX) >= touchSlop) {
                     isScrolling = true;
                     int alterMove = (int) (downX - moveX);
 
-//                    if(alterMove<0){
-//                        scrollDirection = SCROLL_LEFT;
-//                    }else if(alterMove>0){
-//                        scrollDirection = SCROLL_RIGHT;
-//                    }
-
                     if (getScrollX() + alterMove <= leftBorder) {
                         scrollTo((int) leftBorder, 0);
-//                        Log.e("left edage", "edage");
-                    } else{
+                    } else {
                         scrollTo(getScrollX() + alterMove, 0);
-//                        Log.e("not left edage", "edage");
-
                     }
                 }
                 break;
 
             case MotionEvent.ACTION_UP:
-                if(isScrolling == true){
-                    scroller.startScroll(getScrollX(),0,getScrollX()+(int)(moveX-downX),0,2000);
+                if (isScrolling == true) {
+                    scroller.startScroll(getScrollX(), 0, getScrollX() + (int) (moveX - downX), 0, 2000);
                     invalidate();
                 }
 
@@ -186,7 +177,7 @@ public class DateScrollerView extends ViewGroup{
         super.computeScroll();
         if (scroller.computeScrollOffset()) {
 
-            scrollTo(scroller.getCurrX(),0);
+            scrollTo(scroller.getCurrX(), 0);
             postInvalidate();
 
         }
@@ -197,21 +188,21 @@ public class DateScrollerView extends ViewGroup{
         super.scrollTo(x, y);
 
         //toast the year and month
-        int childPostion = getScrollX()/itemWidth+toastPosition;
-        if(childPostion>=getChildCount()){
-            childPostion = getChildCount()-1;
-        }else if(childPostion<0){
+        int childPostion = getScrollX() / itemWidth + toastPosition;
+        if (childPostion >= getChildCount()) {
+            childPostion = getChildCount() - 1;
+        } else if (childPostion < 0) {
             childPostion = 0;
         }
-        if(dateData.get(childPostion).getDayOfMonth()<=3 || dateData.get(childPostion).getDayOfMonth()>=28){
+        if (dateData.get(childPostion).getDayOfMonth() <= 3 || dateData.get(childPostion).getDayOfMonth() >= 28) {
             int currentMonth = dateData.get(childPostion).getMonth();
-            if(lastToastMonth != currentMonth)
+            if (lastToastMonth != currentMonth)
                 toastNextMonth(dateData.get(childPostion));
             lastToastMonth = currentMonth;
         }
 
         //add more days
-        if(getChildAt(getChildCount()-20).getLeft()<=getScrollX() && !isAddingDays){
+        if (getChildAt(getChildCount() - 20).getLeft() <= getScrollX() && !isAddingDays) {
             isAddingDays = true;
             addMoreDays();
         }
@@ -221,29 +212,29 @@ public class DateScrollerView extends ViewGroup{
     }
 
     //generate more days
-    private void addMoreDays(){
+    private void addMoreDays() {
         int currentDataSize = dateData.size();
-        for (int i=0;i<NEW_COUNT;i++){
-            DateScrollerData data = DateScrollerUitls.addDate(getContext(),calendar,1);
+        for (int i = 0; i < NEW_COUNT; i++) {
+            DateScrollerData data = DateScrollerUitls.addDate(getContext(), calendar, 1);
             dateData.add(data);
             LinearLayout child = (LinearLayout) LayoutInflater
-                    .from(getContext()).inflate(R.layout.item_datescroller,null);
-            ((TextView)child.findViewById(R.id.item_datescroller_dayOfWeek)).setText(data.getDay());
-            ((TextView)child.findViewById(R.id.item_datescroller_day))
-                    .setText(data.getDayOfMonth()+"");
-            final int postion = currentDataSize+i;
+                    .from(getContext()).inflate(R.layout.item_datescroller, null);
+            ((TextView) child.findViewById(R.id.item_datescroller_dayOfWeek)).setText(data.getDay());
+            ((TextView) child.findViewById(R.id.item_datescroller_day))
+                    .setText(data.getDayOfMonth() + "");
+            final int postion = currentDataSize + i;
 
             child.setOnTouchListener(new OnTouchListener() {
-                 @Override
-                 public boolean onTouch(View v, MotionEvent event) {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
 
-                     if(!isScrolling)
+                    if (!isScrolling)
                         setSelected(postion);
-                     return false;
-                 }
+                    return false;
+                }
 
 
-             });
+            });
 
             addView(child);
             isAddingDays = false;
@@ -252,17 +243,18 @@ public class DateScrollerView extends ViewGroup{
 
     /**
      * popup to show the month and year
+     *
      * @param dateData
      */
-    private void toastNextMonth(DateScrollerData dateData){
+    private void toastNextMonth(DateScrollerData dateData) {
 
         monthArray = getContext().getResources().getStringArray(R.array.datescroller_month_array);
         String toastMsg = "";
         //if it's not this year
-        if(dateData.getYear()!=currentYear){
-            toastMsg = String.format(getResources().getString(R.string.datescroller_year),dateData.getYear());
+        if (dateData.getYear() != currentYear) {
+            toastMsg = String.format(getResources().getString(R.string.datescroller_year), dateData.getYear());
         }
-        toastMsg += monthArray[dateData.getMonth()-1];
+        toastMsg += monthArray[dateData.getMonth() - 1];
         popUpView.show(toastMsg);
     }
 
@@ -270,42 +262,42 @@ public class DateScrollerView extends ViewGroup{
     /**
      * popupwindow for show the month and year
      */
-    public class PopUpView{
+    public class PopUpView {
 
         private PopupWindow popupWindow;
         private TextView tvMsg;
-        private CountDownTimer countDownTimer = new CountDownTimer(1000,2000) {
+        private CountDownTimer countDownTimer = new CountDownTimer(1000, 2000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                millisUntilFinished-=1000;
+                millisUntilFinished -= 1000;
             }
 
             @Override
             public void onFinish() {
-                if(popupWindow!=null)
+                if (popupWindow != null)
                     popupWindow.dismiss();
             }
         };
 
-        public PopUpView(){
+        public PopUpView() {
 
             tvMsg = new TextView(getContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             tvMsg.setLayoutParams(params);
             tvMsg.setTextColor(Color.WHITE);
             tvMsg.setBackgroundResource(R.drawable.shape_datescroller_toast);
             tvMsg.setGravity(Gravity.CENTER);
-            int padding = DateScrollerUitls.dp2px(getContext(),10);
-            tvMsg.setPadding(padding*2,padding,padding*2,padding);
-            popupWindow = new PopupWindow(tvMsg,LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+            int padding = DateScrollerUitls.dp2px(getContext(), 10);
+            tvMsg.setPadding(padding * 2, padding, padding * 2, padding);
+            popupWindow = new PopupWindow(tvMsg, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             popupWindow.setBackgroundDrawable(new ColorDrawable());
             popupWindow.setOutsideTouchable(true);
         }
 
-        public void show(String msg){
+        public void show(String msg) {
             tvMsg.setText(msg);
             popupWindow.showAtLocation((View) DateScrollerView.this
-                    , Gravity.BOTTOM,0,DateScrollerUitls.dp2px(getContext(),parentHeight));
+                    , Gravity.BOTTOM, 0, DateScrollerUitls.dp2px(getContext(), parentHeight));
             countDownTimer.start();
 
         }
@@ -313,19 +305,19 @@ public class DateScrollerView extends ViewGroup{
 
 
     //set the item selected
-    public void setSelected(int postion){
+    public void setSelected(int postion) {
 
-        if(selectedPosition !=postion){
+        if (selectedPosition != postion) {
 
-            if(selectedPosition !=-1)
+            if (selectedPosition != -1)
                 getChildAt(selectedPosition).setBackgroundResource(0);
 
             selectedPosition = postion;
-            if(selectedPosition !=-1){
+            if (selectedPosition != -1) {
                 View child = getChildAt(postion);
                 child.setBackgroundResource(R.drawable.shape_datescroller_check_bg);
 
-                if(onItemClechListener!=null)
+                if (onItemClechListener != null)
                     onItemClechListener.onItemSelected(dateData.get(postion));
             }
 
@@ -333,17 +325,16 @@ public class DateScrollerView extends ViewGroup{
 
     }
 
-    public int getSelectedPostion(){
+    public int getSelectedPostion() {
         return selectedPosition;
     }
 
-    public void setOnItemCheckListener(OnItemCheckListener onItemCheckListener){
+    public void setOnItemCheckListener(OnItemCheckListener onItemCheckListener) {
         this.onItemClechListener = onItemCheckListener;
     }
 
 
-
-    public interface  OnItemCheckListener {
+    public interface OnItemCheckListener {
 
         public void onItemSelected(DateScrollerData datedata);
     }

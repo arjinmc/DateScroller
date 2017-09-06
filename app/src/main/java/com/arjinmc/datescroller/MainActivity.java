@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         dateScroller.setOnItemClickListener(new DateScroller.OnItemClickListener() {
             @Override
             public void onItemClick(DateScrollerData dateData) {
-                Log.e("date selected",dateData.getYear()+"/"+dateData.getMonth()+"/"+dateData.getDayOfMonth());
+                Log.e("date selected", dateData.getYear() + "/" + dateData.getMonth() + "/" + dateData.getDayOfMonth());
             }
         });
 
         DateScrollerData today = dateScroller.getCurrentDate();
-        Log.e("today is",today.getYear()+"/"+today.getMonth()+"/"+today.getDayOfMonth());
+        Log.e("today is", today.getYear() + "/" + today.getMonth() + "/" + today.getDayOfMonth());
     }
 }
